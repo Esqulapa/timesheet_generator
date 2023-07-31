@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.temporal.TemporalAdjusters;
 import java.util.LinkedHashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -18,7 +19,7 @@ public class DaysByYearMonth {
         this.workingDays = workingDays;
     }
 
-    public Map<YearMonth, DaysOfMonth> getDaysByYearMonthForRangeOfDates(RangeOfDates rangeOfDates, WorkingHours workingHours) {
+    public Map<YearMonth, DaysOfMonth> getDaysByYearMonthForRangeOfDates(RangeOfDates rangeOfDates, WorkingHours workingHours, Locale locale) {
         LocalDate startDate = rangeOfDates.startDate();
         LocalDate endDate = rangeOfDates.endDate();
 
@@ -30,7 +31,7 @@ public class DaysByYearMonth {
                         LinkedHashMap::new,
                         Collectors.mapping(
                                 LocalDate -> new Day(LocalDate.getDayOfMonth(),
-                                        workingHours, LocalDate.getDayOfWeek(), LocalDate, workingDays), Collectors.collectingAndThen(Collectors.toList(), DaysOfMonth::new))
+                                        workingHours, LocalDate.getDayOfWeek(), LocalDate, workingDays, locale), Collectors.collectingAndThen(Collectors.toList(), DaysOfMonth::new))
                 ));
     }
 

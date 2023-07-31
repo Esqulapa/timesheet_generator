@@ -8,6 +8,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -19,6 +20,7 @@ class DaysByYearMonthTest {
     void TestShouldGetDaysByMonthForRangeOfDates() {
         System.out.println("TEST");
         //given
+        Locale polish = new Locale("pl", "PL");
         WorkingHours workingHours = new WorkingHours(8);
         WorkingDays workingDays = new WorkingDays(List.of(DayOfWeek.MONDAY, DayOfWeek.TUESDAY, DayOfWeek.WEDNESDAY, DayOfWeek.THURSDAY, DayOfWeek.FRIDAY));
 
@@ -31,9 +33,9 @@ class DaysByYearMonthTest {
         YearMonth january2023 = YearMonth.of(2023, 1);
         YearMonth february2023 = YearMonth.of(2023, 2);
 
-        List<Day> daysOfDecember = new DaysInMonth(workingDays).getDaysOfMonth(december2022, workingHours);
-        List<Day> daysOfJanuary = new DaysInMonth(workingDays).getDaysOfMonth(january2023, workingHours);
-        List<Day> daysOfFebruary = new DaysInMonth(workingDays).getDaysOfMonth(february2023, workingHours);
+        List<Day> daysOfDecember = new DaysInMonth(workingDays).getDaysOfMonth(december2022, workingHours,polish);
+        List<Day> daysOfJanuary = new DaysInMonth(workingDays).getDaysOfMonth(january2023, workingHours,polish);
+        List<Day> daysOfFebruary = new DaysInMonth(workingDays).getDaysOfMonth(february2023, workingHours,polish);
 
         DaysOfMonth daysOfMonth = new DaysOfMonth(daysOfDecember);
         DaysOfMonth daysOfMonth1 = new DaysOfMonth(daysOfJanuary);
@@ -48,7 +50,7 @@ class DaysByYearMonthTest {
 
 
         //when
-        Map<YearMonth, DaysOfMonth> daysByYearMonth = new DaysByYearMonth(workingDays).getDaysByYearMonthForRangeOfDates(rangeOfDates, workingHours);
+        Map<YearMonth, DaysOfMonth> daysByYearMonth = new DaysByYearMonth(workingDays).getDaysByYearMonthForRangeOfDates(rangeOfDates, workingHours,polish);
 
 
         //then

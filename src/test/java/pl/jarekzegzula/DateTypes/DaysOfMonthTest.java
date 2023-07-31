@@ -5,9 +5,9 @@ import pl.jarekzegzula.WorkingDays;
 import pl.jarekzegzula.WorkingHours;
 
 import java.time.DayOfWeek;
-import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.List;
+import java.util.Locale;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -22,11 +22,11 @@ class DaysOfMonthTest {
 
 
         WorkingDays workingDays = new WorkingDays(List.of(DayOfWeek.MONDAY, DayOfWeek.TUESDAY, DayOfWeek.WEDNESDAY, DayOfWeek.THURSDAY, DayOfWeek.FRIDAY));
-        List<Day> daysOfDecember = new DaysInMonth(workingDays).getDaysOfMonth(december2022, workingHours);
+        List<Day> daysOfDecember = new DaysInMonth(workingDays).getDaysOfMonth(december2022, workingHours, Locale.ENGLISH);
         DaysOfMonth daysOfMonth = new DaysOfMonth(daysOfDecember);
 
         //when
-        Double countedWorkingDays = daysOfMonth.countWorkingDays2(daysOfMonth, workingDays);
+        Double countedWorkingDays = daysOfMonth.countWorkingDays(daysOfMonth, workingDays);
         Double countedWorkingDays2 = daysOfMonth.countWorkingDays(daysOfMonth, workingDays);
         //
         System.out.println(countedWorkingDays);

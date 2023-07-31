@@ -4,13 +4,12 @@ import pl.jarekzegzula.DateTypes.Day;
 import pl.jarekzegzula.DateTypes.DaysOfMonth;
 
 import java.time.YearMonth;
-import java.util.Locale;
 import java.util.Map;
 
 public class FormattedDayPrinter {
 
 
-    public static String formatDays(Map<YearMonth, DaysOfMonth> daysByYearMonth, WorkingDays listOfWorkingDays) {
+    public static String formatDays(Map<YearMonth, DaysOfMonth> daysByYearMonth,WorkingDays listOfWorkingDays) {
         StringBuilder sb = new StringBuilder();
 
         sb.append("| Date        | Day           | Working Hours | Working Day |").append("\n");
@@ -24,14 +23,14 @@ public class FormattedDayPrinter {
                     sb.append(String.format("|%-13s",day.getDate()))
                             .append(String.format("|%-15s",day.getDayOfWeek()))
                             .append(String.format("|%-15s",day.getNumberOfWorkingHours()))
-                            .append(String.format("|%-13s|",day.isWorkingDayToString(listOfWorkingDays))
+                            .append(String.format("|%-13s|",day.isWorkingDayToString(day.getWorkingDays()))
                                     .toUpperCase()).append("\n");
 
 
 
             }sb.append(String.format("%29s",""))
                     .append(String.format(" |SUMA = %-8s| %n" ,
-                            daysOfMonth.countWorkingDays2(daysOfMonth,listOfWorkingDays))).append("\n");
+                            daysOfMonth.countWorkingDays(daysOfMonth,listOfWorkingDays))).append("\n");
         }
 
         return sb.toString();
