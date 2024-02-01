@@ -10,39 +10,31 @@ import java.time.YearMonth;
 import java.util.Locale;
 import java.util.Map;
 
-
 public class App {
 
-    public static void main(String[] args) throws IOException {
+  public static void main(String[] args) throws IOException {
 
+    ConsolePrints.showProgramTitle();
 
-        ConsolePrints.showProgramTitle();
+    Locale localeFromUser = DataFromUser.getLocaleFromUser();
 
-        Locale localeFromUser = DataFromUser.getLocaleFromUser();
+    LocalDate startDateFromUser = DataFromUser.getFirstDateFromUser();
 
-        LocalDate startDateFromUser = DataFromUser.getFirstDateFromUser();
+    LocalDate endDateFromUser = DataFromUser.getSecondDateFromUser(startDateFromUser);
 
-        LocalDate endDateFromUser = DataFromUser.getSecondDateFromUser(startDateFromUser);
+    WorkingHours numberOfWorkingHoursFromUser = DataFromUser.getNumberOfWorkingHoursFromUser();
 
-        WorkingHours numberOfWorkingHoursFromUser = DataFromUser.getNumberOfWorkingHoursFromUser();
+    WorkingDays workingDaysFromUser = DataFromUser.getWorkingDaysFromUser();
 
-        WorkingDays workingDaysFromUser = DataFromUser.getWorkingDaysFromUser();
+    RangeOfDates rangeOfDates = new RangeOfDates(startDateFromUser, endDateFromUser);
 
-        RangeOfDates rangeOfDates = new RangeOfDates(startDateFromUser, endDateFromUser);
+    DaysByYearMonth daysByYearMonth = new DaysByYearMonth(workingDaysFromUser);
 
-        DaysByYearMonth daysByYearMonth = new DaysByYearMonth(workingDaysFromUser);
+    Map<YearMonth, DaysOfMonth> daysByYearMonthForRangeOfDates =
+        daysByYearMonth.getDaysByYearMonthForRangeOfDates(
+            rangeOfDates, numberOfWorkingHoursFromUser, localeFromUser);
+    TimeSheetCreator timeSheetCreator = new TimeSheetCreator();
 
-        Map<YearMonth, DaysOfMonth> daysByYearMonthForRangeOfDates = daysByYearMonth.
-                getDaysByYearMonthForRangeOfDates(rangeOfDates, numberOfWorkingHoursFromUser,localeFromUser);
-        TimeSheetCreator timeSheetCreator = new TimeSheetCreator();
-
-        timeSheetCreator.createTimeSheet(daysByYearMonthForRangeOfDates,localeFromUser);
-
-
-
-
-
-    }
-
-
+    timeSheetCreator.createTimeSheet(daysByYearMonthForRangeOfDates, localeFromUser);
+  }
 }

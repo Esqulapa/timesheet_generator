@@ -14,6 +14,8 @@ public class DataFromUser {
     private static final int maximumNumberOfHours = 12;
 
     private static final int minimumWorkingDaysInWeek = 1;
+
+
     private static final int maximumWorkingDaysInWeek = 5;
 
     private static final int earliestYear = 2010;
@@ -24,8 +26,8 @@ public class DataFromUser {
     public static Locale getLocaleFromUser() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("""
-                Please select language for your Time Sheet:                                
-                1.Polish.                                
+                Please select language for your Time Sheet:
+                1.Polish.
                 2.English.""");
 
         Locale locale = null;
@@ -172,10 +174,7 @@ public class DataFromUser {
                 if (input.equalsIgnoreCase("done")){
                     break;
                 }
-
                 DayOfWeek selectedDay = DayOfWeek.valueOf(input.toUpperCase());
-
-
                 if (selectedDays.contains(selectedDay)) {
                     System.out.println("Day already selected. Please choose a different day.");
                     continue;
@@ -188,11 +187,8 @@ public class DataFromUser {
                     System.out.println("There has to be at least one working day");
 
                 }
-
                 selectedDays.add(selectedDay);
-
                 remainingDays.remove(selectedDay);
-
                 System.out.println("Selected days: " + selectedDays + "\n");
                 System.out.println("Remaining days: " + remainingDays);
 
